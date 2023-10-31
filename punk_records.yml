@@ -1,0 +1,16 @@
+# Configuration file to start your own adventure
+
+# Online server website to retrieve the chapters
+online:
+  base_url: https://tcbscans.com/
+  manga_url: mangas/5/one-piece
+
+# Parameters to control how and when and how many times the website is fetched
+flow:
+  cooldown: 300 # Seconds
+  max_count: 1000
+
+# Local file with info about the already released chapters
+logbook:
+  logbook: namis_logbook.yml
+    
