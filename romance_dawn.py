@@ -15,6 +15,7 @@ log = logging.getLogger(__name__)
 
 # =============================================================================
 
+
 def romance_dawn(
     punk_records: str,
 ) -> None:
@@ -45,12 +46,13 @@ def romance_dawn(
     log.info(f'Last chapter released: {last_chapter["manga"]} {last_chapter["number"]}')
     
     # Flow control variable init
+    log.info('Starting our adventure!')
     count = 0
     cooldown = conf['flow']['cooldown']
     max_count = conf['flow']['max_count']
     live_chapter = last_chapter
     # Flow control loop
-    while live_chapter['number']==last_chapter['number'] and count<max_count:
+    while live_chapter['number'] == last_chapter['number'] and count < max_count:
         # Sequence count
         count += 1
         log.info(f'Sequence counter = {count} / {max_count}')
@@ -77,16 +79,16 @@ def romance_dawn(
 
         else:
             log.critical(
-                "Local chapter is bigger than online info. Don't ask me what, but something is wrong. Please, review the local logbook and the online source"
+                "Local chapter is bigger than online info. Don't ask me what, but something is wrong. "
+                "Please, review the local logbook and the online source"
             )
                 
         # Cooldown time
         log.info(f'Cooling down for {cooldown} seconds = {cooldown/60:0.2f} minutes')
         time.sleep(cooldown)
 
-
-
 # =============================================================================
+
 
 if __name__ == '__main__':
     log.info('*** PROGRAM START ***')

@@ -11,9 +11,10 @@ log = logging.getLogger(__name__)
 
 # =============================================================================
 
+
 def update_logbook(
     url: str,
-) -> list[dict[str,dict[str,str]]]:
+) -> list[dict[str, dict[str, str]]]:
     """
     Checks if a new chapter is online and adds it to the logbook
     INPUTS
