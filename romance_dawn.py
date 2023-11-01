@@ -7,11 +7,11 @@ import time
 # la creme de la creme
 from logbook import update_logbook
 
-# Logging
-import logging
-
-logging.basicConfig(level=logging.DEBUG)
-log = logging.getLogger(__name__)
+# # Logging
+# import logging
+#
+# log = logging.getLogger(__name__)
+from OdensJournal.config import log
 
 # =============================================================================
 
@@ -22,7 +22,7 @@ def romance_dawn(
     """
     Main function with the whole structure of the activity:
         1. Read configuration file
-        2. Read logbook with all the already released chapters
+        2. Read logbook with all the locally logged chapters
         3. Update logbook with the latest information online
         4. Flow control
 
@@ -43,7 +43,7 @@ def romance_dawn(
 
     # Last chapter in the logbook
     last_chapter = logbook[0]['Chapter']
-    log.info(f'Last chapter released: {last_chapter["manga"]} {last_chapter["number"]}')
+    log.info(f'Last chapter logged: {last_chapter["manga"]} {last_chapter["number"]}')
     
     # Flow control variable init
     log.info('Starting our adventure!')
@@ -62,6 +62,7 @@ def romance_dawn(
             url=conf['online']['base_url']+conf['online']['manga_url']
         )
         live_chapter = logbook[0]['Chapter']
+        log.info(f'Last chapter logged: {last_chapter["manga"]} {last_chapter["number"]}')
         log.info(f'Last chapter online: {live_chapter["manga"]} {live_chapter["number"]}')
 
         # Conditional flow
@@ -84,7 +85,7 @@ def romance_dawn(
             )
                 
         # Cooldown time
-        log.info(f'Cooling down for {cooldown} seconds = {cooldown/60:0.2f} minutes')
+        log.info(f'Cooling down for {cooldown}s = {int(cooldown/60):2d}m {cooldown%60}s')
         time.sleep(cooldown)
 
 # =============================================================================

@@ -7,7 +7,7 @@ online:
 
 # Parameters to control how and when and how many times the website is fetched
 flow:
-  cooldown: 300 # Seconds
+  cooldown: 305 # Seconds
   max_count: 1000
 
 # Local file with info about the already released chapters
