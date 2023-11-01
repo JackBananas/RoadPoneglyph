@@ -7,11 +7,11 @@ import time
 # la creme de la creme
 from logbook import update_logbook
 
-# # Logging
-# import logging
-#
-# log = logging.getLogger(__name__)
-from OdensJournal.config import log
+# Logging
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+log = logging.getLogger(__name__)
 
 # =============================================================================
 
@@ -85,7 +85,7 @@ def romance_dawn(
             )
                 
         # Cooldown time
-        log.info(f'Cooling down for {cooldown}s = {int(cooldown/60):2d}m {cooldown%60}s')
+        log.info(f'Cooling down for {cooldown}s = {int(cooldown/60):02d}m {cooldown%60:02d}s')
         time.sleep(cooldown)
 
 # =============================================================================
