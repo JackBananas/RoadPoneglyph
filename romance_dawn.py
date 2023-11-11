@@ -85,7 +85,7 @@ def romance_dawn(
             )
                 
         # Cooldown time
-        log.info(f'Cooling down for {cooldown}s = {int(cooldown/60):2d}m {cooldown%60}s')
+        log.info(f'Cooling down for {cooldown}s = {int(cooldown/60):02d}m {cooldown%60:02d}s')
         time.sleep(cooldown)
 
 # =============================================================================
