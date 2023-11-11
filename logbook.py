@@ -22,7 +22,7 @@ def update_logbook(
     OUTPUT
         logbook :: list of Chapters online updated
     """
-    log.debug(f'Fetching {url} to retrieve the List of Chapters')
+    log.info(f'Fetching {url} to retrieve the List of Chapters')
     html = requests.get(url).text
     soup = BeautifulSoup(html, 'html.parser')
     # New logbook to store the last online info
@@ -45,7 +45,7 @@ def update_logbook(
                         )
                     )    
                 )
-    log.info(f'Found {len(logbook)} chapters online')
+    log.debug(f'Found {len(logbook)} chapters online')
     return logbook
 
 

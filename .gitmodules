@@ -1,0 +1,3 @@
+[submodule "OdensJournal"]
+	path = OdensJournal
+	url = https://github.com/JackBananas/OdensJournal.git
