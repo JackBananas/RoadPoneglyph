@@ -10,7 +10,6 @@ from logbook import update_logbook
 # Logging
 import logging
 
-logging.basicConfig(level=logging.DEBUG)
 log = logging.getLogger(__name__)
 
 # =============================================================================
@@ -37,13 +36,13 @@ def romance_dawn(
         conf = yaml.safe_load(file)
     # Read logbook file
     logbook_file = conf['logbook']['logbook']
-    log.debug(f'Reading logbook file: {logbook_file}')
+    log.info(f'Reading logbook file: {logbook_file}')
     with open(logbook_file, 'r') as file:
         logbook = yaml.safe_load(file)
 
     # Last chapter in the logbook
     last_chapter = logbook[0]['Chapter']
-    log.info(f'Last chapter released: {last_chapter["manga"]} {last_chapter["number"]}')
+    log.info(f'Last chapter logged: {last_chapter["manga"]} {last_chapter["number"]} - {last_chapter["title"]}')
     
     # Flow control variable init
     log.info('Starting our adventure!')
@@ -63,6 +62,7 @@ def romance_dawn(
         )
         live_chapter = logbook[0]['Chapter']
         log.info(f'Last chapter online: {live_chapter["manga"]} {live_chapter["number"]}')
+        log.info(f'Last chapter logged: {last_chapter["manga"]} {last_chapter["number"]}')
 
         # Conditional flow
         if last_chapter['number'] == live_chapter['number']:
@@ -70,10 +70,11 @@ def romance_dawn(
 
         elif last_chapter['number'] < live_chapter['number']:
             log.critical(f'This is a new {last_chapter["manga"]} chapter!!!')
-            log.info(f'{last_chapter["manga"]} Chapter {last_chapter["number"]}: {last_chapter["title"]}')
+            log.info(f'{live_chapter["manga"]} Chapter {live_chapter["number"]} - {live_chapter["title"]}')
             log.info('Writing logbook with the new online information')
             with open(logbook_file, 'w') as file:
                 yaml.dump(logbook, file)
+            log.warning('TBI push logbook to git')
             # tell_morgans()
             break
 
@@ -91,12 +92,14 @@ def romance_dawn(
 
 
 if __name__ == '__main__':
+    # Set up logging
+    from OdensJournal import log_setup
+    log_setup()
+
     log.info('*** PROGRAM START ***')
-    
     romance_dawn(
         punk_records='punk_records.yml'
     )
-
     log.info('*** END OF PROGRAM ***')
 
 # =============================================================================
