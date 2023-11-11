@@ -71,7 +71,7 @@ def romance_dawn(
 
         elif last_chapter['number'] < live_chapter['number']:
             log.critical(f'This is a new {last_chapter["manga"]} chapter!!!')
-            log.info(f'{last_chapter["manga"]} Chapter {last_chapter["number"]}: {last_chapter["title"]}')
+            log.info(f'{live_chapter["manga"]} Chapter {live_chapter["number"]}: {live_chapter["title"]}')
             log.info('Writing logbook with the new online information')
             with open(logbook_file, 'w') as file:
                 yaml.dump(logbook, file)
