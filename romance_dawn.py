@@ -1,6 +1,7 @@
 # Main script to track the Chapter release
 
 # Module importation
+import os.path
 import yaml
 import time
 
@@ -30,13 +31,27 @@ def romance_dawn(
     OUTPUT
         None
     """
+    # Abs path for the configuration file
+    punk_records = os.path.normpath(
+            os.path.join(
+                os.path.dirname(__file__),
+                punk_records
+            )
+    )
     # Read configuration file
-    log.debug(f'Reading configuration file: {punk_records}')
+    log.debug(f'Reading configuration file: {os.path.basename(punk_records)}')
     with open(punk_records, 'r') as file:
         conf = yaml.safe_load(file)
+
+    # Abs path for the logbook file
+    logbook_file = os.path.normpath(
+            os.path.join(
+                os.path.dirname(__file__),
+                conf['logbook']['logbook']
+            )
+    )
     # Read logbook file
-    logbook_file = conf['logbook']['logbook']
-    log.info(f'Reading logbook file: {logbook_file}')
+    log.info(f'Reading logbook file: {os.path.basename(logbook_file)}')
     with open(logbook_file, 'r') as file:
         logbook = yaml.safe_load(file)
 
@@ -55,7 +70,7 @@ def romance_dawn(
         # Sequence count
         count += 1
         log.info(f'Sequence counter = {count} / {max_count}')
-        
+
         # Update logbook with the online list of chapters
         logbook = update_logbook(
             url=conf['online']['base_url']+conf['online']['manga_url']
@@ -83,7 +98,7 @@ def romance_dawn(
                 "Local chapter is bigger than online info. Don't ask me what, but something is wrong. "
                 "Please, review the local logbook and the online source"
             )
-                
+
         # Cooldown time
         log.info(f'Cooling down for {cooldown}s = {int(cooldown/60):02d}m {cooldown%60:02d}s')
         time.sleep(cooldown)
