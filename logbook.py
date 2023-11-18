@@ -130,7 +130,7 @@ class Logbook:
     ):
         log.debug('Init release sequence')
         self.chapters.insert(0, dict(Chapter=new_chapter))
-        # self._write()
+        self._write()
         self._git_push()
         log.warning('TBI notification to the users')
 
