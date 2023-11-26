@@ -157,7 +157,7 @@ class Logbook:
         log.info(f'Commit logbook to git with message = {msg}')
         repo.index.commit(msg)
 
-        branch = 'logGit'
+        branch = 'main'
         log.info(f'Push changes to the remote {branch} branch')
         repo.git.push('origin', branch)
         log.warning('Need to change the remote branch')

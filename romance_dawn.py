@@ -57,7 +57,7 @@ def romance_dawn(
 
 if __name__ == '__main__':
     # Set up logging
-    from OdensJournal import log_setup
+    from odensJournal import log_setup
     log_setup()
 
     log.info('*** PROGRAM START ***')
